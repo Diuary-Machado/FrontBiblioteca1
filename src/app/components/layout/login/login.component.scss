@@ -1,0 +1,22 @@
+.gradient-custom {
+   
+    background: #571258;
+    
+    background: -webkit-linear-gradient(to right, rgb(58, 96, 185), rgb(113, 0, 252));
+    
+    background: linear-gradient(to right, rgb(52, 98, 173), rgb(28, 20, 48))
+    }
+
+    .transition-hover {
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .transition-hover:hover {
+        background-color: #474073; 
+        color: #000000; 
+      }
+      
+      .bg-custom {
+        background-color: red($color: #25283c) 
+      }
+      

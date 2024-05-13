@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+
+
+body {
+    background: #0577ea;
+    background: -webkit-linear-gradient(to right, #2c3e50, #4CA1AF); 
+    background: linear-gradient(to right, #2c3e50, #4CA1AF); 
+    color: white; 
+}
+
+
+.alinharDireita {
+    text-align: right !important;
+  }
+  
+  .centralizar {
+    text-align: center !important;
+  }
+  
+  .topo {
+    position: relative;
+    top: 25vh;
+  }
+  
+  .card {
+    background: #2c3e50; 
+    background: -webkit-linear-gradient(to right, #2c3e50, #4CA1AF);
+    background: linear-gradient(to right, #2c3e50, #4CA1AF); 
+    color: rgb(255, 255, 255); 
+    
+}
+.card .form-control {
+    color: rgb(255, 255, 255); 
+}
+  
+  .modal-content {
+    .modal-header, .btn-close {
+      background-color: rgb(51, 72, 106);
+      color: white;
+    }
+
+  
+  }
+  
+  

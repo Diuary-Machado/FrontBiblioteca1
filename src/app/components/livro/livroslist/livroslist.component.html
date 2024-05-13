@@ -1,0 +1,59 @@
+<div class="container mt-4">
+    <div class="card" style="background-color: #34495e; color: #ecf0f1;">
+        <div class="card-body">
+            <h3 class="text-liv">LIVROS</h3>
+            <div class="text-end">
+                <button (click)="new()" class="btn btn-success btn-rounded">
+                    <i class="fa fa-plus fa-1x"></i> Novo
+                </button>
+                
+            </div>
+            <br>
+            <table class="table" style="color: #ecf0f1;">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Editora</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let livro of lista; let i = index;">
+                        <th scope="row">{{ livro.id }}</th>
+                        <td>{{ livro.nome }}</td>
+                        <td>{{ livro.autor }}</td>
+                        <td>{{ livro.editora }}</td>
+                        <td>
+                            <div class="alinharDireita">
+                                <button (click)="edit(livro)" class="btn btn-primary btn-rounded">
+                                    <i class="fa fa-pen fa-1x"></i>
+                                </button>
+                                <button (click)="deleteById(livro)" class="btn btn-danger btn-rounded">
+                                    <i class="fa fa-trash-can fa-1x"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #modalDetalhe>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Cadastro de livro</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modalRef.close()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <app-livrosdetails [livro]="livroEdit" (retorno)="retornoDetalhe($event)"></app-livrosdetails>
+    </div>
+  </ng-template>

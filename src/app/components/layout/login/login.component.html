@@ -1,0 +1,53 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-custom text-white" style="border-radius: 2rem; background-color: rgba(0, 0, 0, 0.7);">
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
+
+              <h2 class="fw-bold mb-2 text-uppercase">Seja Bem Vindo!</h2>
+              <p class="text-white-50 mb-5">Coloque seus Dados!</p>
+
+              <div class="form-floating mb-4">
+                <input 
+                  type="email" 
+                  id="typeEmailX" 
+                  class="form-control form-control-lg bg-transparent border-0 text-white" 
+                  (keyup.enter)="logar()"
+                  [(ngModel)]="login"
+                />
+                <label class="form-label text-white" for="typeEmailX">Usuario</label>
+              </div>
+              
+              <div class="form-floating mb-4">
+                <input 
+                  type="password" 
+                  id="typePasswordX" 
+                  class="form-control form-control-lg bg-transparent border-0 text-white" 
+                  (keyup.enter)="logar()"
+                  [(ngModel)]="senha"
+                />
+                <label class="form-label text-white" for="typePasswordX">Senha</label>
+              </div>
+              
+              <button 
+              class="btn btn-outline-dark btn-lg px-5 transition-hover" 
+              type="submit"
+              (click)="logar()"
+              
+            >
+              Login
+            </button>
+            
+            </div>
+
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
