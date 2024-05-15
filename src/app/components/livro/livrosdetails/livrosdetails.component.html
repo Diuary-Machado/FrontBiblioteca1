@@ -14,6 +14,7 @@
           />
           <label mdbLabel class="form-label" for="form1">Nome</label> 
         </mdb-form-control>
+
         <br>
         <mdb-form-control>
           <input
@@ -21,23 +22,31 @@
             type="text"
             id="form2"
             class="form-control"
-            [(ngModel)]="livro.autor"
+            (keyup.enter)="save()"
+            [(ngModel)]="livro.autorNome"
           />
           <label mdbLabel class="form-label" for="form2">Autor</label>
         </mdb-form-control>
+        
         <br>
+
         <mdb-form-control>
           <input
             mdbInput
             type="text"
             id="form3"
             class="form-control"
-            [(ngModel)]="livro.editora"
+            (keyup.enter)="save()"
+            [(ngModel)]="livro.editoraNome"
           />
           <label mdbLabel class="form-label" for="form3">Editora</label>
         </mdb-form-control>
+        
+      
+
         <br>
         <button
+
           (click)="save()"
           type="button"
           class="btn btn-primary btn-rounded"

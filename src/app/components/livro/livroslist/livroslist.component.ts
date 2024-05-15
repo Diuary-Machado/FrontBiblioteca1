@@ -6,6 +6,7 @@ import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit
 import { LivrosdetailsComponent } from '../livrosdetails/livrosdetails.component';
 import { Livro } from '../../../models/livro';
 import Swal from 'sweetalert2';
+import { LivroService } from '../../../services/livro.service';
 
 @Component({
   selector: 'app-livroslist',
@@ -28,34 +29,40 @@ export class LivroslistComponent {
   lista: Livro[] = [];
   livroEdit!: Livro;
 
+  livroService = inject(LivroService);
 
   constructor() {
-    this.findAll();
+    this.listAll();
+    
+    let livroNovo = history.state.livroNovo;
+    let livroEditado = history.state.livroEditado;
+
+    if (livroNovo != null) {
+      livroNovo.id = 555;
+      this.lista.push(livroNovo);
+    }
+
+    if (livroEditado != null) {
+      let indice = this.lista.findIndex((x) => {
+        return x.id == livroEditado.id;
+      });
+      if (indice !== -1) {
+        this.lista[indice] = livroEditado;
+      }
+    }
   }
 
-  findAll() {
-    let livro1 = new Livro();
-    livro1.id = 1;
-    livro1.nome = 'A Origem ';
-    livro1.autor = 'Machado de Assis';
-    livro1.editora = 'Record';
-  
-    let livro2 = new Livro();
-    livro2.id = 2;
-    livro2.nome = 'O Poder do Hábito';
-    livro2.autor = 'Agatha Christie';
-    livro2.editora = 'Editora Globo';
-  
-    let livro3 = new Livro();
-    livro3.id = 3;
-    livro3.nome = 'A Culpa é das Estrelas';
-    livro3.autor = 'Stephen King';
-    livro3.editora = 'Companhia das Letras';
-  
-    this.lista.push(livro1);
-    this.lista.push(livro2);
-    this.lista.push(livro3);
+  listAll() {
+    this.livroService.listAll().subscribe({
+      next: lista => {
+        this.lista = lista;
+      },
+      error: erro => {
+        alert('A lista de livros não pôde ser carregada.');
+      }
+    });
   }
+  
   
   new() {
     this.livroEdit = new Livro();
@@ -67,40 +74,50 @@ export class LivroslistComponent {
     this.livroEdit = Object.assign({}, livro); 
     this.modalRef = this.modalService.open(this.modalDetalhe);
   }
-  
+
 
   deleteById(livro: Livro) {
     Swal.fire({
-      title: 'Deseja realmente deletar este objeto?',
+      title: 'Tem certeza que deseja deletar este registro?',
+      icon: 'warning',
+      showConfirmButton: true,
       showDenyButton: true,
       confirmButtonText: 'Sim',
-      denyButtonText: 'Não',
+      cancelButtonText: 'Não',
     }).then((result) => {
       if (result.isConfirmed) {
-        let indice = this.lista.findIndex((livroItem) => {
-          return livroItem.id === livro.id;
+        this.livroService.delete(livro.id).subscribe({
+          next: retorno => {
+            Swal.fire({
+              title: 'Deletado com sucesso!',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
+            this.listAll();
+          },
+          error: erro => {
+            
+            console.log(erro);
+            Swal.fire({
+              title: 'Deu algum erro!',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            });
+          }
         });
-  
-        this.lista.splice(indice, 1);
-  
-        Swal.fire('Livro deletado com sucesso!', '', 'success');
       }
     });
   }
   
+  
   retornoDetalhe(livro: Livro) {
-    if (this.livroEdit.id > 0) {
-        let indice = this.lista.findIndex((livroItem) => {
-            return livroItem.id === this.livroEdit.id;
-        });
-        this.lista[indice] = livro;
-    } else {
-        livro.id = Math.floor(Math.random() * 47) + 4; 
-        this.lista.push(livro);
-    }
+
+    this.listAll();
+
     this.modalRef.close();
+  }
 }
 
 
 
-}
+

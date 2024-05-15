@@ -23,8 +23,8 @@
                     <tr *ngFor="let livro of lista; let i = index;">
                         <th scope="row">{{ livro.id }}</th>
                         <td>{{ livro.nome }}</td>
-                        <td>{{ livro.autor }}</td>
-                        <td>{{ livro.editora }}</td>
+                        <td>{{ livro.autorNome }}</td>
+                        <td>{{ livro.editoraNome }}</td>
                         <td>
                             <div class="alinharDireita">
                                 <button (click)="edit(livro)" class="btn btn-primary btn-rounded">
